@@ -1,0 +1,26 @@
+{
+  "name": "odin-inventoryapplication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --env-file=.env app.js",
+    "seed": "node --env-file=.env db/populate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brewmaster12/odin-inventoryApplication.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/brewmaster12/odin-inventoryApplication/issues"
+  },
+  "homepage": "https://github.com/brewmaster12/odin-inventoryApplication#readme",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
