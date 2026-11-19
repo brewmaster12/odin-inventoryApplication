@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+    <h1><%= genre.name %></h1>
+    <ul>
+        <% games.forEach((game) => { %>
+            <li>
+                <a href="/games/<%= game.id %>"><%= game.title %></a> (<%= game.release_year %>)
+            </li>
+        <% }) %>
+    </ul>
+    
+</body>
+</html>
