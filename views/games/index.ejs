@@ -8,7 +8,7 @@
     <ul>
         <% games.forEach((game) => { %>
             <li>
-                <%= game.title %> (<%= game.release_year %>) - <%= game.developer %>
+                <a href="/games/<%= game.id %>"><%= game.title %></a> (<%= game.release_year %>) - <%= game.developer %>
             </li>
         <% }) %>
     </ul>
