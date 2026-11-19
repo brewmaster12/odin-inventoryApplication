@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <ul>
+        <% devs.forEach((dev) => { %>
+            <li>
+                <a href="/developers/<%= dev.id %>"><%= dev.name %></a>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>

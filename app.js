@@ -4,6 +4,7 @@ const app = express();
 
 const gamesRouter = require("./routes/gamesRouter.js");
 const genresRouter = require("./routes/genresRouter.js");
+const developersRouter = require("./routes/developersRouter.js");
 const path = require("node:path");
 
 app.set("views", path.join(__dirname, "views"));
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/games", gamesRouter);
 app.use("/genres", genresRouter);
+app.use("/developers", developersRouter);
 
 
 const assetsPath = path.join(__dirname, "public");

@@ -47,10 +47,37 @@ async function getGamesByGenreId(genreId) {
     return rows;
 }
 
+async function getAllDevs() {
+    const { rows } = await pool.query(`
+        SELECT * FROM developers ORDER BY name
+    `);
+    return rows;
+}
+
+async function getDevById(id) {
+    const { rows } = await pool.query(
+        "SELECT id, name FROM developers WHERE id = $1",
+        [id]
+    );
+    return rows[0];
+}
+
+async function getGamesByDevId(devId) {
+    const { rows } = await pool.query(`
+        SELECT *
+        FROM games
+        WHERE games.developer_id = $1
+    `, [devId]);
+    return rows;
+}
+
 module.exports = {
     getAllGames,
     getGameById,
     getAllgenres,
     getGenreById,
-    getGamesByGenreId
+    getGamesByGenreId,
+    getAllDevs,
+    getDevById,
+    getGamesByDevId
 }
