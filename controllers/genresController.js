@@ -15,7 +15,36 @@ const getGenreById = async (req, res) => {
     res.render("genres/genre", { title: `Genre: ${genre.name}`, genre, games })
 }
 
+const genreCreateGet = (req, res) => {
+    res.render("genres/form", { title: "New genre", genre: {} })
+}
+
+const genreCreatePost = async (req, res) => {
+    const name = (req.body.name || "").trim();
+    
+    await db.insertGenre(name);
+    
+    res.redirect("/genres");
+}
+
+const genreUpdateGet = async (req, res) => {
+    const id = Number(req.params.genreId);
+    const genre = await db.getGenreById(id);
+    res.render("genres/form", { title: `Edit ${genre.name}`, genre })
+}
+
+const genreUpdatePost = async (req, res) => {
+    const id = Number(req.params.genreId);
+    const name = (req.body.name || "").trim();
+    await db.updateGenre(id, name);
+    res.redirect(`/genres/${id}`);
+}
+
 module.exports = {
     genresListGet,
-    getGenreById
+    getGenreById,
+    genreCreateGet,
+    genreCreatePost,
+    genreUpdateGet,
+    genreUpdatePost
 }
