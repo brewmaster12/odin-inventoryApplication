@@ -21,7 +21,7 @@ async function getGameById(id) {
     return rows[0];
 }
 
-async function getAllgenres() {
+async function getAllGenres() {
     const { rows } = await pool.query(`
         SELECT * FROM genres ORDER BY name
     `);
@@ -88,7 +88,7 @@ async function updateGenre(id, name) {
 module.exports = {
     getAllGames,
     getGameById,
-    getAllgenres,
+    getAllGenres,
     getGenreById,
     getGamesByGenreId,
     getAllDevs,
