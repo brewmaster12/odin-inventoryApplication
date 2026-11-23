@@ -85,6 +85,20 @@ async function updateGenre(id, name) {
     )
 }
 
+async function insertDev(name) {
+    await pool.query(
+        "INSERT INTO developers (name) VALUES ($1)",
+        [name]
+    )
+}
+
+async function updateDev(id, name) {
+    await pool.query(
+        "UPDATE developers SET name = $1 WHERE id = $2",
+        [name, id]
+    )
+}
+
 module.exports = {
     getAllGames,
     getGameById,
@@ -95,5 +109,7 @@ module.exports = {
     getDevById,
     getGamesByDevId,
     insertGenre,
-    updateGenre
+    updateGenre,
+    insertDev,
+    updateDev
 }
