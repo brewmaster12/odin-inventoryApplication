@@ -95,11 +95,20 @@ const devUpdatePost = [
     }
 ]
 
+const devDeletePost = async (req, res) => {
+    const id = Number(req.params.devId);
+    if (!Number.isInteger(id)) return res.status(404).send("Developer not found");
+
+    await db.deleteDev(id);
+    res.redirect("/developers");
+}
+
 module.exports = {
     devsListGet,
     getDevById,
     devCreateGet,
     devCreatePost,
     devUpdateGet,
-    devUpdatePost
+    devUpdatePost,
+    devDeletePost
 }

@@ -117,11 +117,20 @@ const gameUpdatePost = [
     },
 ];
 
+const gameDeletePost = async (req, res) => {
+    const id = Number(req.params.gameId);
+    if (!Number.isInteger(id)) return res.status(404).send("Game not found");
+
+    await db.deleteGame(id);
+    res.redirect("/games");
+}
+
 module.exports = {
     gamesListGet,
     getGameById,
     gameCreateGet,
     gameCreatePost,
     gameUpdateGet,
-    gameUpdatePost
+    gameUpdatePost,
+    gameDeletePost
 }

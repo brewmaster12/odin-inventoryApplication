@@ -12,6 +12,11 @@
             </li>
         <% }) %>
     </ul>
+
+    <form method="POST" action="/genres/<%= genre.id %>/delete"
+        onsubmit="return confirm('Delete this genre? Its games will not be deleted.');">
+        <button type="submit">Delete</button>
+    </form>
     
 </body>
 </html>

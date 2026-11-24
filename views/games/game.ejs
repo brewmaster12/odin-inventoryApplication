@@ -8,5 +8,11 @@
     <p>Relased: <%= game.release_year %></p>
     <p>Developer: <%= game.developer %></p>
     
+
+    <form method="POST" action="/games/<%= game.id %>/delete"
+        onsubmit="return confirm('Delete this game?');">
+        <button type="submit">Delete</button>
+    </form>
+
 </body>
 </html>

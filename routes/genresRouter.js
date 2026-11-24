@@ -8,6 +8,7 @@ genresRouter.get("/new", genresController.genreCreateGet);
 genresRouter.post("/new", genresController.genreCreatePost);
 genresRouter.get("/:genreId/edit", genresController.genreUpdateGet);
 genresRouter.post("/:genreId/edit", genresController.genreUpdatePost);
+genresRouter.post("/:genreId/delete", genresController.genreDeletePost);
 genresRouter.get("/:genreId", genresController.getGenreById);
 
 module.exports = genresRouter;

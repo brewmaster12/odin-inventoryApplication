@@ -158,6 +158,18 @@ async function updateGame(id, { title, releaseYear, developerId, genreIds }) {
     }
 }
 
+async function deleteGenre(id) {
+    await pool.query("DELETE FROM genres WHERE id = $1", [id]);
+}
+
+async function deleteDev(id) {
+    await pool.query("DELETE FROM developers WHERE id = $1", [id]);
+}
+
+async function deleteGame(id) {
+    await pool.query("DELETE FROM games WHERE id = $1", [id]);
+}
+
 module.exports = {
     getAllGames,
     getGameById,
@@ -173,5 +185,8 @@ module.exports = {
     updateDev,
     getGenreIdsByGameId,
     insertGame,
-    updateGame
+    updateGame,
+    deleteGenre,
+    deleteDev,
+    deleteGame
 }

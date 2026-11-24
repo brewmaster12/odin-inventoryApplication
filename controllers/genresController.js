@@ -95,11 +95,20 @@ const genreUpdatePost = [
     }
 ]
 
+const genreDeletePost = async (req, res) => {
+    const id = Number(req.params.genreId);
+    if (!Number.isInteger(id)) return res.status(404).send("Genre not found");
+
+    await db.deleteGenre(id);
+    res.redirect("/genres");
+}
+
 module.exports = {
     genresListGet,
     getGenreById,
     genreCreateGet,
     genreCreatePost,
     genreUpdateGet,
-    genreUpdatePost
+    genreUpdatePost,
+    genreDeletePost
 }

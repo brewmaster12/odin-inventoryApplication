@@ -21,7 +21,7 @@ const SQL = `
         id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         title VARCHAR(255) NOT NULL,
         release_year INTEGER,
-        developer_id INTEGER REFERENCES developers(id) ON DELETE RESTRICT
+        developer_id INTEGER REFERENCES developers(id) ON DELETE SET NULL
     );
 
     CREATE TABLE games_genres (

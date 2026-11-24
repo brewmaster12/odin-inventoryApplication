@@ -8,6 +8,7 @@ developersRouter.get("/new", developersController.devCreateGet);
 developersRouter.post("/new", developersController.devCreatePost);
 developersRouter.get("/:devId/edit", developersController.devUpdateGet);
 developersRouter.post("/:devId/edit", developersController.devUpdatePost);
+developersRouter.post("/:devId/delete", developersController.devDeletePost);
 developersRouter.get("/:devId", developersController.getDevById);
 
 module.exports = developersRouter;
