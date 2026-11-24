@@ -99,6 +99,65 @@ async function updateDev(id, name) {
     )
 }
 
+async function getGenreIdsByGameId(gameId) {
+    const { rows } = await pool.query(
+        "SELECT genre_id FROM games_genres WHERE game_id = $1",
+        [gameId]
+    );
+    return rows.map((row) => row.genre_id);
+}
+
+async function insertGame({ title, releaseYear, developerId, genreIds}) {
+    const client = await pool.connect();
+    try {
+        await client.query("BEGIN");
+        const { rows } = await client.query(
+            `INSERT INTO games (title, release_year, developer_id)
+            VALUES ($1, $2, $3) RETURNING id`,
+            [title, releaseYear, developerId]
+        );
+        const gameId = rows[0].id;
+        for (const genreId of genreIds) {
+            await client.query(
+                "INSERT INTO games_genres (game_id, genre_id) VALUES ($1, $2)",
+                [gameId, genreId]
+            );
+        }
+        await client.query("COMMIT");
+        return gameId;
+    } catch (err) {
+        await client.query("ROLLBACK");
+        throw err;
+    } finally {
+        client.release();
+    }
+}
+
+async function updateGame(id, { title, releaseYear, developerId, genreIds }) {
+    const client = await pool.connect();
+    try {
+        await client.query("BEGIN");
+        await client.query(
+            `UPDATE games SET title = $1, reelase_year = $2, developer_id = $3
+            WHERE id = $4`,
+            [title, releaseYear, developerId, id]
+        );
+        await client.query("DELETE FROM games_genres WHERE game_id = $1", [id]);
+        for (const genreId of genreIds) {
+            await client.query(
+                "INSERT INTO games_genres (game_id, genre_id) VALUES ($1, $2",
+                [id, genreId]
+            );
+        }
+        await client.query("COMMIT");
+    } catch (err) {
+        await client.query("ROLLBACK");
+        throw err;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllGames,
     getGameById,
@@ -111,5 +170,8 @@ module.exports = {
     insertGenre,
     updateGenre,
     insertDev,
-    updateDev
+    updateDev,
+    getGenreIdsByGameId,
+    insertGame,
+    updateGame
 }
